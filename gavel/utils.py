@@ -107,7 +107,7 @@ def send_sendgrid_emails(emails):
     if exceptions:
         raise Exception('Error sending some emails to: %s' % exceptions)
 
- def sendgrid_send_email(to_address, subject, body):
+def sendgrid_send_email(to_address, subject, body):
     new_dict = {}
     new_dict["personalizations"] = []
     new_dict["personalizations"].append({"to": [{"email": to_address}], "subject": subject})
