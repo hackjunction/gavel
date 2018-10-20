@@ -29,6 +29,11 @@ unless absolutely necessary.**
 
 Gavel makes it really simple for you to submit votes, but please think hard
 before you vote. **Once you make a decision, you can't take it back**.
+
+Gavel might also assign you to review your own project. In this case, you naturally won't have to watch
+a demo of your own project. Regardless, you should vote on whether you think your own project is better than
+the project you saw last. Be as unbiased as possible with this, but do keep in mind that most people will
+probably be favoring their own project in this situation.
 '''.strip()
 
 DEFAULT_EMAIL_SUBJECT = 'Welcome to Gavel!'
@@ -36,7 +41,7 @@ DEFAULT_EMAIL_SUBJECT = 'Welcome to Gavel!'
 DEFAULT_EMAIL_BODY = '''
 Hi {name},
 
-Welcome to Gavel, the online expo judging system. This email contains your
+Welcome to Gavel, the online expo judging system for JUNCTIONxBudapest. This email contains your
 magic link to the judging system.
 
 DO NOT SHARE this email with others, as it contains your personal magic link.
@@ -48,7 +53,7 @@ instructions before continuing.
 '''.strip()
 
 DEFAULT_CLOSED_MESSAGE = '''
-The judging system is currently closed. Reload the page to try again.
+The judging system is currently closed. It will open once the Demo Expo begins, and close again once it is over. Reload the page to try again.
 '''.strip()
 
 DEFAULT_DISABLED_MESSAGE = '''
@@ -56,11 +61,11 @@ Your account is currently disabled. Reload the page to try again.
 '''.strip()
 
 DEFAULT_LOGGED_OUT_MESSAGE = '''
-You are currently logged out. Open your magic link to get started.
+You are currently logged out. Open your magic link from your email to get started.
 '''.strip()
 
 DEFAULT_WAIT_MESSAGE = '''
-Wait for a little bit and reload the page to try again.
+All projects are currently busy. Wait for a little bit and reload the page to try again.
 
-If you've looked at all the projects already, then you're done.
+If you've looked at all of the projects already, then you're done.
 '''.strip()
