@@ -166,3 +166,9 @@ email_body: null
 # event to this list (https://github.com/anishathalye/gavel/wiki/Users), at the
 # very least.
 send_stats: null
+
+# can also configure Gavel to use SendGrid to send emails
+# Set use_sendgrid to be true. Default value is false
+# also, add in your API key. Default value for that is None.
+use_sendgrid: null
+sendgrid_api_key: null
