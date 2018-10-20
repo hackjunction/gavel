@@ -120,7 +120,7 @@ def sendgrid_send_email(to_address, subject, body):
         'authorization': "Bearer " + settings.SENDGRID_API_KEY,
         'content-type': "application/json",
         }
-     response = requests.request("POST", sendgrid_url, data=json.dumps(new_dict), headers=headers)
+    response = requests.request("POST", sendgrid_url, data=json.dumps(new_dict), headers=headers)
     return response
 
 
