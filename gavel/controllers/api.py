@@ -1,7 +1,8 @@
 from gavel import app
 from gavel.models import *
 import gavel.utils as utils
-from flask import Response
+from flask import Response, url_for
+import json
 
 @app.route('/api/items.csv')
 @app.route('/api/projects.csv')
@@ -45,3 +46,16 @@ def decisions_dump():
         str(d.time)
     ] for d in decisions]
     return Response(utils.data_to_csv_string(data), mimetype='text/csv')
+
+# Authorization Basic username:password
+@app.route('/api/users-link')
+@utils.protected_endpoint
+def users_link():
+    response = json.dumps([
+            {
+                'link': url_for('login', secret=a.secret, _external=True),
+                'email': a.email,
+                'registration': a.description,
+            } for a in Annotator.query.all()
+        ])
+    return Response(response, mimetype='application/json')

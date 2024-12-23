@@ -68,6 +68,7 @@ c = Config(CONFIG_FILE)
 # 'config.vagrant.yaml'
 SERVER_NAME =          c.get('server_name',     'SERVER_NAME',               default=None)
 PROXY =          _bool(c.get('proxy',           'PROXY',                     default=False))
+ADMIN_USERNAME =       c.get('admin_username',  'ADMIN_USERNAME', default='admin')
 ADMIN_PASSWORD =       c.get('admin_password',  'ADMIN_PASSWORD')
 DB_URI = _postgres_uri(c.get('db_uri',          ['DATABASE_URL', 'DB_URI'],  default='postgresql://localhost/gavel'))
 BROKER_URI =           c.get('broker_uri',      ['REDIS_URL', 'BROKER_URI'], default='redis://localhost:6379/0')

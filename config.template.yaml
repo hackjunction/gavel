@@ -2,6 +2,9 @@
 # Required Settings #
 #####################
 
+# can also be specified as the 'ADMIN_USERNAME' environment variable
+admin_username: null
+
 # can also be specified as the 'ADMIN_PASSWORD' environment variable
 admin_password: null
 

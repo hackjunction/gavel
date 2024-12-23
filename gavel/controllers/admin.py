@@ -12,6 +12,7 @@ from flask import (
 )
 import urllib.parse
 import xlrd
+from sqlalchemy import text
 
 ALLOWED_EXTENSIONS = set(['csv', 'xlsx', 'xls'])
 
@@ -96,6 +97,28 @@ def item():
                 return utils.server_error(str(e))
     return redirect(url_for('admin'))
 
+
+@app.route('/admin/reset', methods=['POST'])
+@utils.requires_auth
+def reset():
+    def tx():
+        db.session.execute(text('SET CONSTRAINTS ALL DEFERRED'))
+
+        # Set prev and next fields of all Annotators referencing the Item to None
+        Annotator.query.filter(Annotator.prev_id.isnot(None)).update({Annotator.prev_id: None}, synchronize_session='fetch')
+        Annotator.query.filter(Annotator.next_id.isnot(None)).update({Annotator.next_id: None}, synchronize_session='fetch')
+
+        db.session.execute(view_table.delete())
+
+        db.session.execute(ignore_table.delete())
+        Item.query.delete()
+        Annotator.query.delete()
+        Decision.query.delete()
+
+        db.session.execute(text('SET CONSTRAINTS ALL IMMEDIATE'))
+        db.session.commit()
+    with_retries(tx)
+    return redirect(url_for('admin'))
 
 def allowed_file(filename):
     return '.' in filename and \

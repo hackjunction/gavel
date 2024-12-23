@@ -21,7 +21,7 @@ def gen_secret(length):
     return base64.b32encode(os.urandom(length))[:length].decode('utf8').lower()
 
 def check_auth(username, password):
-    return username == 'admin' and password == settings.ADMIN_PASSWORD
+    return username == settings.ADMIN_USERNAME and password == settings.ADMIN_PASSWORD
 
 def authenticate():
     return Response('Access denied.', 401,
@@ -146,3 +146,21 @@ def cast_row(row):
         else:
             row[i] = str(item)
     return row
+
+def protected_endpoint(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        authorization = request.headers.get('x-access-token', None)
+        if authorization is None:
+            return Response(json.dumps({
+                'error': 'Invalid authorization header'
+            }), 401, mimetype='application/json')
+
+        username, password = authorization.split(':')
+
+        if not check_auth(username, password):
+            return Response(json.dumps({
+                'error': 'Invalid username or password'
+            }), 401, mimetype='application/json')
+        return f(*args, **kwargs)
+    return decorated

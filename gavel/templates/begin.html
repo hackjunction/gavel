@@ -5,36 +5,44 @@
   <div class="banner-tight">
     <h1>Start</h1>
   </div>
-  {% with item=item %}
-  {% include "_item.html" %}
-  {% endwith %}
+  <div class="container">
+    <div class="compare">
+      <div class="card">
+        <div class="header header-dark">
+          <h2 class="title">{{item.name}}</h2>
+          <p class="note">First project</p>
+        </div>
+        <div>
+          {% with item=item %}
+          {% include "_item.html" %}
+          {% endwith %}
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
 
-<div class="item">
-  <div class="banner" id="vote-header">
-    <h1>Vote</h1>
-  </div>
+<div class="container">
+  <div class="item">
+    <div class="banner" id="vote-header">
+      <h1>Actions</h1>
+    </div>
 
-  <div class="info">
-    <form action="{{ url_for('begin') }}" method="post">
-      <p class="center">Comparison voting begins after you see your first project. Please click <b>CONTINUE</b> after seeing this project or <b>SKIP</b> if you cannot find this project.</p>
-      <div id="vote-continue" class="radio-button button-full button-gap">
-        <input type="radio" name="action" id="vote-continue-radio" value="Continue">
-        <label for="vote-continue-radio">Continue</label>
-      </div>
+    <div class="info">
+      <form action="{{ url_for('begin') }}" method="post">
+        <p class="center">Comparison voting begins after you see your first project. Please click <b>CONTINUE</b> after
+          seeing this project or <b>SKIP</b> if you cannot open this project.</p>
 
-      <div id="vote-skip" class="radio-button button-full button-gap">
-        <input type="radio" name="action" id="vote-skip-radio" value="Skip" checked>
-        <label for="vote-skip-radio">Skip</label>
-      </div>
+        <input id="action-continue" type="submit" name="action" value="Continue" class="button-full button-gap positive">
+        <input id="action-skip" type="submit" name="action" value="Skip" class="button-full button-gap negative">
 
-      <input type="submit" name="action" value="Submit" id="vote-submit" class="button-full button-gap">
 
-      <input type="hidden" name="item_id" value="{{ item.id }}">
-      <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-    </form>
+        <input type="hidden" name="item_id" value="{{ item.id }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+      </form>
 
-    <script src="{{ url_for('static', filename='js/smart-button-toggle.js') }}"></script>
+    </div>
   </div>
 </div>
 {% endblock %}

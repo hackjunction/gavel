@@ -1,30 +1,64 @@
+$color-green: #55D186;
+$color-red-500: #FF8383;
+$color-red-700: #D33939;
+$color-violet-500: #9069FF;
+$color-violet-700: #7656D0;
+$color-violet-950: #3B2B68;
+$color-black: #0A0A0A;
+$color-blue-gray: #0C111D;
+$color-white: #fffefa;
+$color-gray-400: #99959D;
+$color-gray-100: #e8e8e8;
+$color-slate: #66676F;
+
 $branding-orange: #ffbc29;
 $branding-turquoise: #4ecdc4;
 $branding-red: #fc5454;
 $branding-yellow: #ffe86b;
 $branding-grey: #cccccc;
-$branding-green: #c9d41b;
+$branding-green: $color-green;
 $branding-blue: #57b6ff;
 $branding-dark: #0b3b4b;
+$branding-violet:$color-violet-500;
+
 
 $wait-color: $branding-yellow;
 $error-color: $branding-red;
+
 $previous-color: $branding-orange;
+$previous-color-highlight: mix($previous-color, black, 75%);
+
 $current-color: $branding-turquoise;
-$vote-color: $branding-red;
+$current-color-highlight: mix($current-color, black, 75%);
+
+$vote-color: $color-black;
+
 $vote-skip-color: $branding-red;
-$vote-submit-color: $branding-blue;
-$admin-color: $branding-dark;
+$vote-skip-color-highlight: mix($vote-skip-color, white, 25%);
+
+$vote-submit-color: $branding-violet;
+
+$admin-color: $color-black;
+
 $disabled-color: mix($branding-red, white, 25%);
+
 $prioritized-color: mix($branding-green, white, 25%);
-$positive-color: $branding-green;
-$negative-color: $branding-red;
+
+$positive-color: mix($branding-green, white, 25%);
+$negative-color: mix($branding-red, white, 25%);
 $neutral-color: $branding-yellow;
 
-$text-color: #000000;
-$link-color: mix($branding-turquoise, black, 50%);
-$light: #fffefa;
-$light-grey: #e8e8e8;
-$dark: $branding-dark;
-$heading-font: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
-$body-font: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$link-hover-color: $color-violet-700;
+
+$text-disabled: $color-slate;
+$text-color: $color-black;
+$link-color: mix($branding-turquoise, $color-black, 50%);
+$light: $color-white;
+$light-grey: $color-gray-100;
+$dark: $color-black;
+$heading-font: "Space Mono",  monospace;
+$body-font: "Inter",  sans-serif;
+$card-header-background: $dark;
+$card-header-color: $light;
+$card-body-background: $light;
+$card-body-color: $dark;

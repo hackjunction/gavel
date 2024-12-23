@@ -2,57 +2,81 @@
 {% block title %}Vote{% endblock %}
 {% block content %}
 <div class="item">
-  <div class="banner-tight" id="previous-header">
-    <h1>Previous</h1>
+  <div class="banner-tight">
+    <h1>Compare</h1>
+    <p>{{seen_count}} projects seen</p>
   </div>
-  <div id="previous-body">
-    {% with item=prev %}
-    {% include "_item.html" %}
-    {% endwith %}
+  <div class="container">
+    <div class="compare">
+      <div class="card previous">
+        <div class="header header-dark" id="previous-header">
+          <h2 class="title">{{prev.name}}</h2>
+          <p class="note">Previous</p>
+        </div>
+        <div id="previous-body">
+          {% with item=prev %}
+          {% include "_item.html" %}
+          {% endwith %}
+        </div>
+      </div>
+      <div class="card current">
+        <div class="header header-dark" id="current-header">
+          <h2 class="title">{{next.name}}</h2>
+          <p class="note">New</p>
+        </div>
+        <div id="current-body">
+          {% with item=next %}
+          {% include "_item.html" %}
+          {% endwith %}
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
 
-<div class="item">
-  <div class="banner-tight" id="current-header">
-    <h1>Current</h1>
-  </div>
-  <div id="current-body">
-    {% with item=next %}
-    {% include "_item.html" %}
-    {% endwith %}
-  </div>
-</div>
 
-<div class="item">
-  <div class="banner" id="vote-header">
-    <h1>Vote</h1>
-  </div>
+<div class="container">
+  <div class="item">
 
-  <div class="info">
-    <form action="{{ url_for('vote') }}" method="post">
-      <p class="center">Which one is better?</p>
-      <div id="vote-previous" class="radio-button button-left">
-        <input type="radio" name="action" id="vote-previous-radio" value="Previous">
-        <label for="vote-previous-radio">Previous</label>
-      </div>
+    <div class="banner" id="vote-header">
+      <h1>Vote</h1>
+    </div>
 
-      <div id="vote-current" class="radio-button button-right">
-        <input type="radio" name="action" id="vote-current-radio" value="Current">
-        <label for="vote-current-radio">Current</label>
-      </div>
+    <div class="info">
+      <form action="{{ url_for('vote') }}" method="post">
+        <div id="vote-previous" class="radio-button button-full button-gap">
+          <input type="radio" name="action" id="vote-previous-radio" value="Previous">
+          <label for="vote-previous-radio">
+            {% with item=prev %}
+            Choose {{ item.name }}
+            {% endwith %}
+          </label>
+        </div>
 
-      <div id="vote-skip" class="radio-button button-full button-gap">
-        <input type="radio" name="action" id="vote-skip-radio" value="Skip" checked>
-        <label for="vote-skip-radio">Skip</label>
-      </div>
+        <div id="vote-current" class="radio-button button-full button-gap">
+          <input type="radio" name="action" id="vote-current-radio" value="Current">
+          <label for="vote-current-radio">
+            {% with item=next %}
+            Choose {{ item.name }}
+            {% endwith %}
+          </label>
+        </div>
 
-      <input type="submit" name="action" value="Submit" id="vote-submit" class="button-full button-gap">
-      <input type="hidden" name="prev_id" value="{{ prev.id }}">
-      <input type="hidden" name="next_id" value="{{ next.id }}">
-      <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-    </form>
+        <input type="submit" name="submit" value="Select your favorite" id="vote-submit" class="button-full button-gap">
 
-    <script src="{{ url_for('static', filename='js/smart-button-toggle.js') }}"></script>
+        <div id="vote-skip" class="radio-skip button-full button-gap">
+          <input type="radio" name="action" id="vote-skip-radio" value="Skip" checked>
+          <label for="vote-skip-radio">Something wrong? Click here to skip {{next.name}}</label>
+        </div>
+
+        <input type="hidden" name="prev_id" value="{{ prev.id }}">
+        <input type="hidden" name="next_id" value="{{ next.id }}">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+      </form>
+
+      <script src="{{ url_for('static', filename='js/smart-button-toggle.js') }}"></script>
+    </div>
   </div>
 </div>
 {% endblock %}

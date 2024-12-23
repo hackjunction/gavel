@@ -6,7 +6,7 @@ Vagrant.configure(2) do |config|
   config.vm.synced_folder '.', '/gavel', type: 'rsync',
     rsync__exclude: ['.git/', 'env/'],
     rsync__args: ['--verbose', '--archive', '-z', '--copy-links']
-
+    
   # disable default synced folder
   config.vm.synced_folder '.', '/vagrant', disabled: true
 
