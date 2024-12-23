@@ -58,10 +58,10 @@ We'd really appreciate any kind of input, especially pull requests.
 
 ## Deployment
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy?template=https://github.com/wickathou/gavel/tree/update/general-improvements-and-stress-testing)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy?template=https://github.com/hackjunction/gavel/tree/update/general-improvements-and-stress-testing)
 
-The latest stable version is the `master` branch (and it's signed and tagged).
-Development happens in the `develop` branch.
+The latest stable version is the `prod` branch (and it's signed and tagged).
+Development happens in the `stag` branch.
 
 The web application is written in **Python 3** using Flask. It also uses NumPy
 and SciPy for math stuff. Doing a `pip --no-cache-dir install -r requirements.txt` should
