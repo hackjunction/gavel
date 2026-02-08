@@ -18,11 +18,10 @@ if settings.PROXY:
 
 from flask_assets import Environment, Bundle
 assets = Environment(app)
-assets.config['pyscss_style'] = 'expanded'
 scss = Bundle(
     'css/style.scss',
     depends='**/*.scss',
-    filters=('pyscss',),
+    filters=('libsass',),
     output='all.css'
 )
 assets.register('scss_all', scss)
