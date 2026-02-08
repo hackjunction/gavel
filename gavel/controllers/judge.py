@@ -238,9 +238,9 @@ def perform_vote(annotator, next_won):
         loser.mu,
         loser.sigma_sq
     )
-    annotator.alpha = u_alpha
-    annotator.beta = u_beta
-    winner.mu = u_winner_mu
-    winner.sigma_sq = u_winner_sigma_sq
-    loser.mu = u_loser_mu
-    loser.sigma_sq = u_loser_sigma_sq
+    annotator.alpha = float(u_alpha)
+    annotator.beta = float(u_beta)
+    winner.mu = float(u_winner_mu)
+    winner.sigma_sq = float(u_winner_sigma_sq)
+    loser.mu = float(u_loser_mu)
+    loser.sigma_sq = float(u_loser_sigma_sq)
