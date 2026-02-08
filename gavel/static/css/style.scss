@@ -499,6 +499,6 @@ input[type='submit']:hover {
     padding: 1rem;
   }
   .admin-table {
-    @extend .overflow-x-auto;
+    overflow-x: auto;
   }
 }
