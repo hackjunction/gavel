@@ -3,13 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import sqlalchemy.exc
 import psycopg2.errors
 
-class SerializableAlchemy(SQLAlchemy):
-    def apply_driver_hacks(self, app, info, options):
-        if not 'isolation_level' in options:
-            # XXX is this slow? are there better ways?
-            options['isolation_level'] = 'SERIALIZABLE'
-        return super(SerializableAlchemy, self).apply_driver_hacks(app, info, options)
-db = SerializableAlchemy()
+db = SQLAlchemy(engine_options={"isolation_level": "SERIALIZABLE"})
 
 from gavel.models.annotator import Annotator, ignore_table
 from gavel.models.item import Item, view_table

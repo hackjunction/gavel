@@ -33,7 +33,6 @@ celery = Celery(app.name, broker=app.config['CELERY_BROKER_URL'])
 celery.conf.update(app.config)
 
 from gavel.models import db
-db.app = app
 db.init_app(app)
 
 import gavel.template_filters # registers template filters
