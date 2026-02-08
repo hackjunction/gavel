@@ -13,7 +13,7 @@ from flask import (
 )
 from numpy.random import choice, random, shuffle
 from functools import wraps
-from datetime import datetime
+from datetime import datetime, timezone
 
 def requires_open(redirect_to):
     def decorator(f):
@@ -187,7 +187,7 @@ def preferred_items(annotator):
         (Annotator.active == True) & (Annotator.next != None) & (Annotator.updated != None)
     ).all()
     busy = {i.next.id for i in annotators if \
-        (datetime.utcnow() - i.updated).total_seconds() < settings.TIMEOUT * 60}
+        (datetime.now(timezone.utc).replace(tzinfo=None) - i.updated).total_seconds() < settings.TIMEOUT * 60}
     nonbusy = [i for i in items if i.id not in busy]
     preferred = nonbusy if nonbusy else items
 

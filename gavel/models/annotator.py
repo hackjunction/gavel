@@ -1,8 +1,8 @@
 from gavel.models import db
 import gavel.utils as utils
 import gavel.crowd_bt as crowd_bt
-from sqlalchemy.orm.exc import NoResultFound
-from datetime import datetime
+from sqlalchemy.exc import NoResultFound
+from datetime import datetime, timezone
 
 ignore_table = db.Table('ignore',
     db.Column('annotator_id', db.Integer, db.ForeignKey('annotator.id')),
@@ -40,7 +40,7 @@ class Annotator(db.Model):
             new_next.prioritized = False # it's now assigned, so cancel the prioritization
             # it could happen that the judge skips the project, but that
             # doesn't re-prioritize the project
-            self.updated = datetime.utcnow()
+            self.updated = datetime.now(timezone.utc).replace(tzinfo=None)
         self.next = new_next
 
     @classmethod
@@ -56,7 +56,7 @@ class Annotator(db.Model):
         if uid is None:
             return None
         try:
-            annotator = cls.query.with_for_update().get(uid)
+            annotator = db.session.get(cls, uid, with_for_update=True)
         except NoResultFound:
             annotator = None
         return annotator

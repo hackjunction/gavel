@@ -1,6 +1,6 @@
 from gavel.models import db
 import gavel.crowd_bt as crowd_bt
-from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import NoResultFound
 
 view_table = db.Table('view',
     db.Column('item_id', db.Integer, db.ForeignKey('item.id')),
@@ -31,7 +31,7 @@ class Item(db.Model):
         if uid is None:
             return None
         try:
-            item = cls.query.get(uid)
+            item = db.session.get(cls, uid)
         except NoResultFound:
             item = None
         return item

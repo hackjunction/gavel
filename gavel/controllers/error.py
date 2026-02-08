@@ -1,5 +1,6 @@
 from gavel import app
 from flask import render_template
+import traceback
 
 @app.errorhandler(404)
 def error_404(e):
@@ -17,6 +18,8 @@ def error_403(e):
 
 @app.errorhandler(500)
 def error_500(e):
+    app.logger.error('500 error: %s', e)
+    traceback.print_exc()
     return (
         render_template('error.html', message='Internal server error. Go back and try again.'),
         500

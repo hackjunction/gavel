@@ -1,5 +1,5 @@
 from gavel.models import db
-from datetime import datetime
+from datetime import datetime, timezone
 
 class Decision(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
@@ -9,7 +9,7 @@ class Decision(db.Model):
     winner = db.relationship('Item', foreign_keys=[winner_id], uselist=False)
     loser_id = db.Column(db.Integer, db.ForeignKey('item.id'))
     loser = db.relationship('Item', foreign_keys=[loser_id], uselist=False)
-    time = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
+    time = db.Column(db.DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
 
     def __init__(self, annotator, winner, loser):
         self.annotator = annotator
