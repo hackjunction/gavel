@@ -1,8 +1,24 @@
 from gavel import app
 from gavel.models import *
+from gavel.constants import SETTING_CLOSED, SETTING_TRUE, SETTING_FALSE
 import gavel.utils as utils
 from flask import Response, request, url_for
 import json
+
+@app.route('/api/items')
+@app.route('/api/projects')
+@utils.protected_endpoint
+def item_results():
+    items = Item.query.order_by(desc(Item.mu)).all()
+    return Response(json.dumps([{
+        'id': item.id,
+        'name': item.name,
+        'location': item.location,
+        'description': item.description,
+        'mu': item.mu,
+        'sigma_sq': item.sigma_sq,
+        'active': item.active,
+    } for item in items]), 200, mimetype='application/json')
 
 @app.route('/api/items.csv')
 @app.route('/api/projects.csv')
@@ -93,6 +109,20 @@ def annotator_import():
         'login_link': url_for('login', secret=a.secret, _external=True)
     } for a in created]), 201, mimetype='application/json')
 
+
+@app.route('/api/close', methods=['POST'])
+@utils.protected_endpoint
+def close_voting():
+    Setting.set(SETTING_CLOSED, SETTING_TRUE)
+    db.session.commit()
+    return Response(json.dumps({'closed': True}), 200, mimetype='application/json')
+
+@app.route('/api/open', methods=['POST'])
+@utils.protected_endpoint
+def open_voting():
+    Setting.set(SETTING_CLOSED, SETTING_FALSE)
+    db.session.commit()
+    return Response(json.dumps({'closed': False}), 200, mimetype='application/json')
 
 # Authorization Basic username:password
 @app.route('/api/users-link')
