@@ -58,7 +58,7 @@ We'd really appreciate any kind of input, especially pull requests.
 
 ## Deployment
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy?template=https://github.com/hackjunction/gavel/tree/upgrade-python-deps)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://www.heroku.com/deploy?template=https://github.com/hackjunction/gavel/tree/platform-integration)
 
 The latest stable version is the `prod` branch (and it's signed and tagged).
 Development happens in the `stag` branch.
